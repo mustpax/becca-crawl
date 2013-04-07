@@ -6,10 +6,20 @@ function follow(user, callback) {
         if (status === 'fail') {
             console.log(user + ': ?');
         } else {
-            var data = page.evaluate(function () {
+            var count = page.evaluate(function () {
                 return document.querySelectorAll('.reserved').length - 1;
             });
-            console.log(user + ' : ' + data);
+
+            var time = page.evaluate(function () {
+                return document.querySelectorAll('.reserve_main_table td')[2].innerText +
+                       ' ' +
+                       document.querySelectorAll('.reserve_main_table td')[3].innerText;
+            });
+
+            var loc = page.evaluate(function () {
+                return document.querySelectorAll('.reserve_main_table td')[4].innerText;
+            });
+            console.log([loc, time, count].join('\t'));
         }
         page.close();
 
