@@ -1,4 +1,5 @@
-var users = ['http://chicago.flywheelsports.com/reserve/gold-coast'];
+var users = ['http://chicago.flywheelsports.com/reserve/gold-coast',
+             'http://chicago.flywheelsports.com/reserve/highland-park'];
 
 function follow(user, callback) {
     var page = require('webpage').create();
