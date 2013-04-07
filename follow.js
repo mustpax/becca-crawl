@@ -14,9 +14,9 @@ function follow(user, callback) {
                 }
                 return ret;
             });
-            console.log(user + ': ' + data.length);
-            console.log(user + ': ' + data[0]);
-            console.log(user + ': ' + data[1]);
+            for (var i = 0; i < data.length; i++) {
+                console.log(user + ' : ' + data[i]);
+            }
         }
         page.close();
 
