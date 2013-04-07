@@ -1,10 +1,10 @@
-var users = ['gold-coast'];
+var users = ['http://chicago.flywheelsports.com/reserve/gold-coast'];
 
 function follow(user, callback) {
     var page = require('webpage').create();
-    page.open('http://chicago.flywheelsports.com/reserve/' + user, function (status) {
+    page.open(user, function (status) {
         if (status === 'fail') {
-            console.log(user + ': ?');
+            console.log(user + ': fail');
         } else {
             var data = page.evaluate(function () {
                 var links = document.querySelectorAll('#schedule_classes a');
@@ -15,7 +15,7 @@ function follow(user, callback) {
                 return ret;
             });
             for (var i = 0; i < data.length; i++) {
-                console.log(user + ' : ' + data[i]);
+                console.log(user + ' ' + data[i]);
             }
         }
         page.close();
