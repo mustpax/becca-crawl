@@ -794,8 +794,7 @@ function process() {
     });
 
     if (users.length > 0) {
-        var user = users[0];
-        users.splice(0, 1);
+        var user = users.pop();
         follow(user, process);
     } else {
         phantom.exit();
