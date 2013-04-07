@@ -20,6 +20,12 @@ function follow(user, callback) {
 }
 
 function process() {
+    phantom.addCookie({
+        'name':     'SESS0503627fa9caee1704074bff31525611',
+        'value':    '2521fe797adf8ef2f485fc57a8ec11f4',
+        'domain':   '.flywheelsports.com'
+    });
+
     if (users.length > 0) {
         var user = users[0];
         users.splice(0, 1);
