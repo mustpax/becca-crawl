@@ -11,17 +11,16 @@ var users = ['PhantomJS',
 
 function follow(user, callback) {
     var page = require('webpage').create();
-    page.open('http://mobile.twitter.com/' + user, function (status) {
+    page.open('http://chicago.flywheelsports.com/reserve/gold-coast', function (status) {
         if (status === 'fail') {
             console.log(user + ': ?');
         } else {
             var data = page.evaluate(function () {
-                return document.querySelector('div.profile td.stat.stat-last div.statnum').innerText;
+                return document.querySelectorAll('#schedule_classes a');
             });
-            console.log(user + ': ' + data);
+            console.log(user + ': ' + data.length);
         }
         page.close();
-        callback.apply();
     });
 }
 
