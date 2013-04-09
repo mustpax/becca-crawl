@@ -23,6 +23,7 @@ var webpage = require('webpage');
 var system  = require('system');
 
 function follow(user, callback) {
+    user = user + '/prev';
     var page = webpage.create();
     page.open(user, function (status) {
         if (status === 'fail') {
