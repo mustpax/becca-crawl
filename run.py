@@ -32,8 +32,14 @@ def get_classes():
     process = Popen(' '.join([PHANTOM_JS, CLASS_SCRIPT, LOCATIONS[0]]),
                     shell=True,
                     stdout=PIPE)
-    return [process.stdout.readline().strip().split('\t')[1]]
 
+    for l in process.stdout:
+        l = l.strip()
+
+        if not len(l):
+            continue
+
+        yield l.split('\t')[1]
 
 def main():
     classes = get_classes()
