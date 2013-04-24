@@ -41,11 +41,35 @@ def get_classes(location):
 
         yield l.split('\t')[1]
 
-def main():
-    classes = get_classes(LOCATIONS[0])
-    for cls in classes:
-        print cls
+def get_attendees(cls):
+    process = Popen(' '.join([PHANTOM_JS, ATTENDANT_SCRIPT, cls]),
+                    shell=True,
+                    stdout=PIPE)
+    return process.stdout.readline().strip()
+
+def main(out_file):
+    out = open(out_file, 'r')
+    classes = frozenset(map(lambda a: a.strip(), out))
+    out.close()
+
+    out = open(out_file, 'a')
+    print 'Classes previously processed: %d' % len(classes)
+    for location in LOCATIONS:
+        for cls in get_classes(location):
+            if cls in classes:
+                print 'Skipping', cls
+            else:
+                print 'Fetching', cls
+                out.write(cls)
+                out.write('\n')
+                out.flush()
+
+    out.close()
 
 if __name__ == '__main__':
-    main()
+    import sys
+    if len(sys.argv) != 2:
+        print 'Usage: ./run.py [output file]'
+    else:
+        main(sys.argv[1])
 
