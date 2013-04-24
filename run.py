@@ -49,7 +49,7 @@ def get_attendees(cls):
 
 def main(out_file):
     out = open(out_file, 'r')
-    classes = frozenset(map(lambda a: a.strip(), out))
+    classes = frozenset(map(lambda a: a.strip().split('\t')[0], out))
     out.close()
 
     out = open(out_file, 'a')
@@ -59,8 +59,10 @@ def main(out_file):
             if cls in classes:
                 print 'Skipping', cls
             else:
-                print 'Fetching', cls
-                out.write(cls)
+                print 'Fetching', cls,
+                att = get_attendees(cls)
+                print '\t'.join(att.split('\t')[1:])
+                out.write(att)
                 out.write('\n')
                 out.flush()
 
