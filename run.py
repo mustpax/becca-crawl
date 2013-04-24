@@ -28,8 +28,8 @@ LOCATIONS = ["http://florida.flywheelsports.com/reserve/miami-beach",
              "http://philadelphia.flywheelsports.com/reserve/center-city",
              "http://dubai.flywheelsports.com/reserve/burj-views"]
 
-def get_classes():
-    process = Popen(' '.join([PHANTOM_JS, CLASS_SCRIPT, LOCATIONS[0]]),
+def get_classes(location):
+    process = Popen(' '.join([PHANTOM_JS, CLASS_SCRIPT, location]),
                     shell=True,
                     stdout=PIPE)
 
@@ -42,7 +42,7 @@ def get_classes():
         yield l.split('\t')[1]
 
 def main():
-    classes = get_classes()
+    classes = get_classes(LOCATIONS[0])
     for cls in classes:
         print cls
 
